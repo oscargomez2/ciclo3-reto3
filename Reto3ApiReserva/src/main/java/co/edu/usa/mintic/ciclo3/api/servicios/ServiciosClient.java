@@ -31,4 +31,34 @@ public class ServiciosClient {
             }
         }
     }
+    
+    public void update(Client client){
+        if(client.getIdClient()!=null){
+            Optional<Client> obtener= metodosCrud.getClient(client.getIdClient());
+            if(!obtener.isEmpty()){
+                if(client.getEmail()!=null){
+                    obtener.get().setEmail(client.getEmail());
+                }
+                if(client.getPassword()!=null){
+                    obtener.get().setPassword(client.getPassword());
+                }
+                if(client.getName()!=null){
+                    obtener.get().setName(client.getName());
+                }
+                if(client.getAge()!=null){
+                    obtener.get().setAge(client.getAge());
+                }
+                metodosCrud.save(obtener.get());
+            }
+        }
+    }
+    
+    public boolean delete(int id){
+        Optional<Client> obtener= metodosCrud.getClient(id);
+        if(!obtener.isEmpty()){
+            metodosCrud.delete(obtener.get());
+            return true;
+        }
+        return false;
+    }
 }

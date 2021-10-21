@@ -31,4 +31,30 @@ public class ServiciosCategory {
             }
         }
     }
+    
+    public void update(Category category){
+        if(category.getId()!= null){
+            Optional<Category> obtener= metodosCrud.getCategoria(category.getId());
+            if(!obtener.isEmpty()){
+                if(category.getName()!=null){
+                    obtener.get().setName(category.getName());
+                }
+                if(category.getDescription()!=null){
+                    obtener.get().setDescription(category.getDescription());
+                }
+                metodosCrud.save(obtener.get());
+            }
+        }
+        
+    }
+    
+    public boolean delete(int id){
+        Optional<Category> obtener=getCategoria(id);
+        if(!obtener.isEmpty()){
+            metodosCrud.delete(obtener.get());
+            return true;
+        }
+        return false;
+
+    }
 }

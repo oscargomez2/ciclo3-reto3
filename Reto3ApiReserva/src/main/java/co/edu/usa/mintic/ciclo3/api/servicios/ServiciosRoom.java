@@ -31,4 +31,34 @@ public class ServiciosRoom {
             }
         }
     }
+    
+    public void update(Room room){
+        if(room.getId()!=null){
+            Optional<Room> obtener= metodosCrud.getRoom(room.getId());
+            if(!obtener.isEmpty()){
+                if(room.getName()!=null){
+                    obtener.get().setName(room.getName());
+                }
+                if(room.getHotel()!=null){
+                    obtener.get().setHotel(room.getHotel());
+                }
+                if(room.getStars()!=null){
+                    obtener.get().setStars(room.getStars());
+                }
+                if(room.getDescription()!=null){
+                    obtener.get().setDescription(room.getDescription());
+                }
+                metodosCrud.save(obtener.get());
+            }
+        }
+    }
+    
+    public boolean delete(int id){
+        Optional<Room> obtener= metodosCrud.getRoom(id);
+        if(!obtener.isEmpty()){
+            metodosCrud.delete(obtener.get());
+            return true;
+        }
+        return false;
+    }
 }

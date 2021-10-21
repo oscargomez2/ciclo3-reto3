@@ -31,4 +31,28 @@ public class ServiciosReservation {
             }
         }
     }
+    
+    public void update(Reservation reservation){
+        if(reservation.getIdReservation()!=null){
+            Optional<Reservation> obtener= metodosCrud.getReservation(reservation.getIdReservation());
+            if(!obtener.isEmpty()){
+                if(reservation.getStartDate()!=null){
+                    obtener.get().setStartDate(reservation.getStartDate());
+                }
+                if(reservation.getDevolutionDate()!=null){
+                    obtener.get().setDevolutionDate(reservation.getDevolutionDate());
+                }
+                metodosCrud.save(obtener.get());
+            }
+        }
+    }
+    
+    public boolean delete(int id){
+        Optional<Reservation> obtener= metodosCrud.getReservation(id);
+        if(!obtener.isEmpty()){
+            metodosCrud.delete(obtener.get());
+            return true;
+        }
+        return false;
+    }
 }
