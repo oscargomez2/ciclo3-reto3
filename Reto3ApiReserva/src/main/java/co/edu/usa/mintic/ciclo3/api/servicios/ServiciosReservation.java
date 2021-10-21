@@ -9,18 +9,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ServiciosReservation {
-
+    
     @Autowired
     private ReservationRepository metodosCrud;
-
+    
     public List<Reservation> getAll() {
         return metodosCrud.getAll();
     }
-
+   
     public Optional<Reservation> getReservation(int id) {
         return metodosCrud.getReservation(id);
     }
-
+    
     public void save(Reservation reservation) {
         if (reservation.getIdReservation()== null) {
             metodosCrud.save(reservation);
